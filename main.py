@@ -130,4 +130,5 @@ st.data_editor(
         ),
     },
     hide_index=True,
+    width=1000, height=1000,
 )
