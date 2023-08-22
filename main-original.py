@@ -1,66 +1,25 @@
+#Function can filter and display all data
+
 import streamlit as st
 import pandas as pd
 import numpy as np
 
-from collections import Counter
-import re
-from nltk.util import ngrams
-import nltk
-
 df = pd.read_csv('Discord-Analysis.csv')
-keywords = df['Month']
-
-all_keywords = ' '.join(keywords)
-words = re.findall(r'\w+', all_keywords)
-words = [word.lower() for word in words]
-
-# Count the frequency of each word
-word_counts = Counter(words)
-total_words = sum(word_counts.values())
-
-# Calculate the frequency as a percentage and sort
-word_freq_percentage = {word: (count / total_words) * 100 for word, count in word_counts.items()}
-sorted_word_freq_percentage = dict(sorted(word_freq_percentage.items(), key=lambda item: item[1], reverse=True))
 
 # Create a sidebar section for filtering
-# st.sidebar.header("Keyword Filter")
-# selected_keyword = st.sidebar.text_input("Enter Keyword")
-
-# Get the top 10 one-word frequencies and their corresponding words
-top_keywords = list(sorted_word_freq_percentage.keys())[:20]
-
-# Create a Streamlit sidebar section for filtering
-# st.sidebar.header("Keyword Filter 2")
-# selected_keyword = st.sidebar.selectbox("Select Keyword", ["All"] + top_keywords)
-
-# Create checkboxes for each keyword and their frequency
-st.sidebar.header("Keyword Filter Checkbox")
-checkboxes = {}
-for keyword in top_keywords:
-    selected = st.sidebar.checkbox(f"{keyword} ({sorted_word_freq_percentage[keyword]:.2f}%)", value=False)
-    checkboxes[keyword] = selected
-
-# Filter the data based on the selected keyword
-selected_keyword = [keyword for keyword, selected in checkboxes.items() if selected]
-
-# Display the selected keyword and filtered data
-st.write(f"Displaying data for keyword: {', '.join(selected_keyword)}")
-if "All" in selected_keyword:
-    filtered_data = df
-else:
-    filtered_data = df[df['Month'].apply(lambda text: all(keyword.lower() in text.lower() for keyword in selected_keyword))]
+st.sidebar.header("Keyword Filter")
+selected_keyword = st.sidebar.text_input("Enter Keyword")
 
 
 # Apply keyword filter to the DataFrame
-df = filtered_data
-
+df = df[df["Month"].str.contains(selected_keyword, case=False, na=False)]
 
 df_12M = df.iloc[:,-16:-4]
 df_Keywords = df.iloc[:, 1:2]
-df_1M = df.iloc[:, -1:]
-df_Sum = df.iloc[:, -4:-3]
-df_6M = df.iloc[:, -3:-2]
-df_3M = df.iloc[:, -2:-1]
+df_Sum = df.iloc[:, -1:]
+df_6M = df.iloc[:, -4:-3]
+df_3M = df.iloc[:, -3:-2]
+df_1M = df.iloc[:, -2:-1]
 
 def df2arr2(df):
     arr = df.to_numpy()
