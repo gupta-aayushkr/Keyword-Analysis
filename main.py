@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-
 from collections import Counter
 import re
 from nltk.util import ngrams
@@ -22,16 +21,9 @@ total_words = sum(word_counts.values())
 word_freq_percentage = {word: (count / total_words) * 100 for word, count in word_counts.items()}
 sorted_word_freq_percentage = dict(sorted(word_freq_percentage.items(), key=lambda item: item[1], reverse=True))
 
-# Create a sidebar section for filtering
-# st.sidebar.header("Keyword Filter")
-# selected_keyword = st.sidebar.text_input("Enter Keyword")
-
 # Get the top 10 one-word frequencies and their corresponding words
 top_keywords = list(sorted_word_freq_percentage.keys())[:20]
 
-# Create a Streamlit sidebar section for filtering
-# st.sidebar.header("Keyword Filter 2")
-# selected_keyword = st.sidebar.selectbox("Select Keyword", ["All"] + top_keywords)
 
 # Create checkboxes for each keyword and their frequency
 st.sidebar.header("Keyword Filter Checkbox")
