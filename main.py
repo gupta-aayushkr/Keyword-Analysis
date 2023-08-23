@@ -5,10 +5,25 @@ from collections import Counter
 import re
 from nltk.util import ngrams
 import nltk
+import os
 
-df = pd.read_csv('Discord-Analysis.csv')
+# Get a list of all CSV files in the current directory
+csv_files = [file for file in os.listdir() if file.endswith(".csv")]
+
+# Display a dropdown to select a CSV file
+selected_csv = st.selectbox("Select a CSV file", csv_files)
+df2 = pd.read_csv(selected_csv)
+df = pd.read_csv(selected_csv)
+
+#DF analysis
+df["Sum"] = round(df2.iloc[:, -12:].sum(axis=1),2)
+df["6-Months"] = round(df2.iloc[:, -6:].sum(axis=1) - df2.iloc[:, -12:-6].sum(axis=1),2)
+df["3-Months"] = round(df2.iloc[:, -3:].sum(axis=1) - df2.iloc[:, -6:-3].sum(axis=1),2)
+df["1-Month"] = round(df2.iloc[:, -1:].sum(axis=1) - df2.iloc[:, -2:-1].sum(axis=1),2)
+
+# st.write(df)
+
 keywords = df['Month']
-
 all_keywords = ' '.join(keywords)
 words = re.findall(r'\w+', all_keywords)
 words = [word.lower() for word in words]
