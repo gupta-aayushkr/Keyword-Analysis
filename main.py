@@ -14,7 +14,7 @@ csv_folder_path = "CSV Files"
 csv_files = [file for file in os.listdir(csv_folder_path) if file.endswith(".csv")]
 
 
-# Display a dropdown to select a CSV file
+# Display a dropdown to select a CSV files
 selected_csv = st.selectbox("Select a CSV file", csv_files)
 df2 = pd.read_csv(os.path.join(csv_folder_path, selected_csv))
 df = pd.read_csv(os.path.join(csv_folder_path, selected_csv))
