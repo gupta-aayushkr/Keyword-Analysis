@@ -1,4 +1,3 @@
-```markdown
 # CSV Data Analysis with Streamlit
 
 This is a Streamlit app that allows you to analyze CSV data files containing sales information. It provides insights into sales trends over different time periods, allows keyword filtering, and displays the results using interactive data visualization.
