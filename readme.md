@@ -1,5 +1,3 @@
-Sure, here's a GitHub README file for your code:
-
 ```markdown
 # CSV Data Analysis with Streamlit
 
