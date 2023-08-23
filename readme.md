@@ -25,8 +25,8 @@ This will open the Streamlit app in your web browser, where you can interact wit
 ### CSV Data Loading and Analysis
 
 - Select a CSV file from the dropdown menu to load and analyze its data.
-- Calculate and display the sum of sales over different time periods: 12 months, 6 months, 3 months, and 1 month.
-- Perform keyword analysis on the 'Month' column and display the top keywords based on their frequency.
+- Calculate and display the Keyword Trends over different time periods: 12 months, 6 months, 3 months, and 1 month.
+- Perform keyword analysis on the 'Keyword' column and display the top keywords based on their frequency.
 
 ### Keyword Filtering
 
@@ -36,17 +36,8 @@ This will open the Streamlit app in your web browser, where you can interact wit
 ### Data Visualization
 
 - Visualize the filtered data using interactive data visualizations.
-- The data is presented in a data table with customizable columns, including keyword, sales in different time periods, and total sales sum.
+- The data is presented in a data table with customizable columns, including keyword, search volume in different time periods, and total search volume.
 
 ## Authors
 
-- [Your Name]
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-```
-
-Replace `[Your Name]` in the "Authors" section with your actual name.
-
-Don't forget to create a `LICENSE` file in the repository directory if you want to use the MIT License, and make sure to customize the README file further based on your preferences and additional information you'd like to include.
+- Aayush Kumar Gupta
