@@ -7,13 +7,17 @@ from nltk.util import ngrams
 import nltk
 import os
 
-# Get a list of all CSV files in the current directory
-csv_files = [file for file in os.listdir() if file.endswith(".csv")]
+# Specify the path to the folder containing CSV files
+csv_folder_path = "CSV Files"
+
+# Get a list of all CSV files in the specified directory
+csv_files = [file for file in os.listdir(csv_folder_path) if file.endswith(".csv")]
+
 
 # Display a dropdown to select a CSV file
 selected_csv = st.selectbox("Select a CSV file", csv_files)
-df2 = pd.read_csv(selected_csv)
-df = pd.read_csv(selected_csv)
+df2 = pd.read_csv(os.path.join(csv_folder_path, selected_csv))
+df = pd.read_csv(os.path.join(csv_folder_path, selected_csv))
 
 #DF analysis
 df["Sum"] = round(df2.iloc[:, -12:].sum(axis=1),2)
