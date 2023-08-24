@@ -38,6 +38,11 @@ This will open the Streamlit app in your web browser, where you can interact wit
 - Visualize the filtered data using interactive data visualizations.
 - The data is presented in a data table with customizable columns, including keyword, search volume in different time periods, and total search volume.
 
+## Note
+
+### Issues Solved
+- Requirements.txt is important for streamlit to install nltk. Otherwise, Not Found Error will be shown.
+
 ## Authors
 
 - Aayush Kumar Gupta
