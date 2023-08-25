@@ -31,8 +31,20 @@ def clean_data(raw_data):
 
 
 if selected_keyword:
+    st.sidebar.write("Select Region")
+    
+    # List of options for the dropdown
+    options = ['Global','India', 'USA']
+    
+    # Dropdown widget in the sidebar
+    selected_region = st.sidebar.selectbox("Select an option:", options)
+    if selected_region == 'Global': selected_option = ''
+    elif selected_region == 'India': selected_region = 'in'
+    elif selected_region == 'USA': selected_region = 'us'
+
+
     my_data = {
-        'country': 'us',
+        'country': selected_region,
         'currency': 'USD',
         'dataSource': 'gkp',
         'kw[]': selected_keyword
@@ -65,6 +77,8 @@ if selected_keyword:
     CPC = keywords_dict["cpc"]["currency"] + keywords_dict["cpc"]["value"]
     Competition = keywords_dict["competition"]
     credits = response.json()["credits"]
+
+
 
     #Related Searches
     url = "https://www.google.com/complete/search"
