@@ -92,8 +92,8 @@ else:
 df = filtered_data
 
 #Filter from Search Bar
-df = df[df["Month"].str.contains(selected_keyword2, case=False, na=False)]
 
+df = df[df["Month"].str.contains(selected_keyword2, case=False, na=False)]
 
 
 df_12M = df.iloc[:,-16:-4]
@@ -138,38 +138,41 @@ data_df = pd.DataFrame(
     }
 )
 
-
-st.data_editor(
-    data_df,
-    column_config={
-        "Keywords": st.column_config.TextColumn(
-            "Keywords", help="The name of the user", max_chars=100
-        ),
-        "12M": st.column_config.BarChartColumn(
-            "12M",
-            help="Sales in the last 12 months",
-            y_min=0,
-            y_max=100,
-        ),
-        "6M": st.column_config.NumberColumn(
-            "6M",
-            help="Sales in the last 6 months",
-            format="%.2f",
-        ),
-        "3M": st.column_config.NumberColumn(
-            "3M",
-            help="Sales in the last 3 months",
-            format="%.2f",
-        ),
-        "1M": st.column_config.NumberColumn(
-            "1M",
-            help="Sales in the last 1 month",
-            format="%.2f",
-        ),
-        "Sum": st.column_config.NumberColumn(
-            "Sum", help="Total sales sum", format="%.2f"
-        ),
-    },
-    hide_index=True,
-    width=1000, height=1000,
-)
+#Handling No data Error
+try:
+    st.data_editor(
+        data_df,
+        column_config={
+            "Keywords": st.column_config.TextColumn(
+                "Keywords", help="The name of the user", max_chars=100
+            ),
+            "12M": st.column_config.BarChartColumn(
+                "12M",
+                help="Sales in the last 12 months",
+                y_min=0,
+                y_max=100,
+            ),
+            "6M": st.column_config.NumberColumn(
+                "6M",
+                help="Sales in the last 6 months",
+                format="%.2f",
+            ),
+            "3M": st.column_config.NumberColumn(
+                "3M",
+                help="Sales in the last 3 months",
+                format="%.2f",
+            ),
+            "1M": st.column_config.NumberColumn(
+                "1M",
+                help="Sales in the last 1 month",
+                format="%.2f",
+            ),
+            "Sum": st.column_config.NumberColumn(
+                "Sum", help="Total sales sum", format="%.2f"
+            ),
+        },
+        hide_index=True,
+        width=1000, height=1000,
+    )
+except:
+    st.warning("No data available.")
