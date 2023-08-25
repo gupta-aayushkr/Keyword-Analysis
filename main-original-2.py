@@ -1,18 +1,19 @@
+#Working - Using NLTK for Onw words prequency in the Sidebar and Mastersheet
+
 import streamlit as st
 import pandas as pd
 import numpy as np
 from collections import Counter
 import re
-# from nltk.util import ngrams
-# import nltk
+from nltk.util import ngrams
+import nltk
 import os
 
-# Same Work as Glob Glob. List CSV from directory CSV Files
+# Specify the path to the folder containing CSV files
 csv_folder_path = "CSV Files"
-csv_files = []
-for file in os.listdir(csv_folder_path):
-    if file.endswith(".csv"):
-        csv_files.append(file)
+
+# Get a list of all CSV files in the specified directory
+csv_files = [file for file in os.listdir(csv_folder_path) if file.endswith(".csv")]
 
 
 # Display a dropdown to select a CSV files
@@ -27,35 +28,21 @@ df["3-Months"] = round(df2.iloc[:, -3:].sum(axis=1) - df2.iloc[:, -6:-3].sum(axi
 df["1-Month"] = round(df2.iloc[:, -1:].sum(axis=1) - df2.iloc[:, -2:-1].sum(axis=1),2)
 
 # st.write(df)
+
 keywords = df['Month']
 all_keywords = ' '.join(keywords)
+words = re.findall(r'\w+', all_keywords)
+words = [word.lower() for word in words]
 
-#r is raw string. \w+ --> w meands alphanumeric + underscores and plus means more than one
-# this will return a list
-words = re.findall(r'\w+', all_keywords) #returns a list
-
-for i in range(len(words)):
-    words[i] = words[i].lower()
-
-# Counting the frequency
-word_counts = Counter(words) #returns a dict
+# Count the frequency of each word
+word_counts = Counter(words)
 total_words = sum(word_counts.values())
 
 # Calculate the frequency as a percentage and sort
-word_freq_percentage = {}
-for word, count in word_counts.items():
-    word_freq_percentage[word] = (count / total_words) * 100
+word_freq_percentage = {word: (count / total_words) * 100 for word, count in word_counts.items()}
+sorted_word_freq_percentage = dict(sorted(word_freq_percentage.items(), key=lambda item: item[1], reverse=True))
 
-# Sorted - sorted(iterable, key=None, reverse=False)
-# key is for how to sort, lamba recieve the (key,value) and returns item[1] - value pair for sorting
-sorted_word_freq_percentage = {}
-sorted_items = sorted(word_freq_percentage.items(), key=lambda item: item[1], reverse=True)
-for key, value in sorted_items:
-    sorted_word_freq_percentage[key] = value
-
-
-
-# Top 10 occured Keywords
+# Get the top 10 one-word frequencies and their corresponding words
 top_keywords = list(sorted_word_freq_percentage.keys())[:20]
 
 
@@ -66,25 +53,17 @@ for keyword in top_keywords:
     selected = st.sidebar.checkbox(f"{keyword} ({sorted_word_freq_percentage[keyword]:.2f}%)", value=False)
     checkboxes[keyword] = selected
 
-# st.write("checking chechboxes", checkboxes)
-# print("selected exits:", selected)
 # Filter the data based on the selected keyword
-selected_keyword = []
-for keyword, selected in checkboxes.items():
-    if selected: #checboxes dictionary contains all top keywords with true or false in front of them
-        selected_keyword.append(keyword)
-
+selected_keyword = [keyword for keyword, selected in checkboxes.items() if selected]
 
 # Display the selected keyword and filtered data
 st.write(f"Displaying data for keyword: {', '.join(selected_keyword)}")
 if "All" in selected_keyword:
     filtered_data = df
 else:
-    #all returns true if all the conditions inside it are True.
-    # text is each element in Month Column
     filtered_data = df[df['Month'].apply(lambda text: all(keyword.lower() in text.lower() for keyword in selected_keyword))]
 
-# st.write(filtered_data)
+
 # Apply keyword filter to the DataFrame
 df = filtered_data
 
