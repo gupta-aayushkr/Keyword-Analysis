@@ -20,7 +20,7 @@ streamlit run app.py
 
 This will open the Streamlit app in your web browser, where you can interact with the CSV data and analyze it using the provided functionalities.
 
-## Features
+## Trending.py (Homepage)
 
 ### CSV Data Loading and Analysis
 
@@ -37,6 +37,15 @@ This will open the Streamlit app in your web browser, where you can interact wit
 
 - Visualize the filtered data using interactive data visualizations.
 - The data is presented in a data table with customizable columns, including keyword, search volume in different time periods, and total search volume.
+
+## Search.py (Sidebar)
+
+### Usage
+
+- In Search.py accessable from Sidebar, you'll see a text input field where you can enter a keyword.
+- Once you enter a keyword and press Enter, the app will retrieve keyword data.
+- It will display metrics such as volume, CPC, and competition for the entered keyword.
+- In the sidebar, you'll find a list of related search suggestions based on the entered keyword.
 
 ## Note
 
