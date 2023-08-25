@@ -1,4 +1,3 @@
 scikit-learn
 requests
 plotly
-re
