@@ -1,2 +1,2 @@
-nltk
 scikit-learn
+requests
