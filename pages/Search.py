@@ -39,7 +39,7 @@ if selected_keyword:
     }
     my_headers = {
         'Accept': 'application/json',
-        'Authorization': 'Bearer bede33d91baed7fd50d0'
+        'Authorization': st.secrets["API"]
     }
 
     response = requests.post(
@@ -85,8 +85,12 @@ if selected_keyword:
     raw_data = response.text
 
     keywords = clean_data(raw_data)
-    res = keywords[:-2]
+    data = keywords[:-2]
+    # Regular expression pattern to match URLs
+    url_pattern = re.compile(r'https?://\S+|/url\?url=\S+')
 
+    # Remove URLs from the list
+    filtered_data = [item for item in data if not url_pattern.search(item)]
 
     # Display values with better formatting
     st.subheader("Keyword Metrics")
@@ -96,7 +100,7 @@ if selected_keyword:
     
     # Display the list in the sidebar
     st.sidebar.header("Related Searches")
-    for item in res:
+    for item in filtered_data:
         st.sidebar.write(item)
     
     # st.subheader("Credits")
