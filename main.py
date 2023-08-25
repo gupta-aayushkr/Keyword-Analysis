@@ -154,20 +154,20 @@ st.data_editor(
         "6M": st.column_config.NumberColumn(
             "6M",
             help="Sales in the last 6 months",
-            format="%.2f",  # Adjust the format as needed
+            format="%.2f",
         ),
         "3M": st.column_config.NumberColumn(
             "3M",
             help="Sales in the last 3 months",
-            format="%.2f",  # Adjust the format as needed
+            format="%.2f",
         ),
         "1M": st.column_config.NumberColumn(
             "1M",
             help="Sales in the last 1 month",
-            format="%.2f",  # Adjust the format as needed
+            format="%.2f",
         ),
         "Sum": st.column_config.NumberColumn(
-            "Sum", help="Total sales sum", format="%.2f"  # Adjust the format as needed
+            "Sum", help="Total sales sum", format="%.2f"
         ),
     },
     hide_index=True,
