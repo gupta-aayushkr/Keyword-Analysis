@@ -58,6 +58,9 @@ for key, value in sorted_items:
 # Top 10 occured Keywords
 top_keywords = list(sorted_word_freq_percentage.keys())[:20]
 
+st.header("Keyword Filter")
+selected_keyword2 = st.text_input("Enter Keyword")
+
 
 # Create checkboxes for each keyword and their frequency
 st.sidebar.header("Keyword Filter Checkbox")
@@ -75,6 +78,7 @@ for keyword, selected in checkboxes.items():
         selected_keyword.append(keyword)
 
 
+#Filter from checkbox
 # Display the selected keyword and filtered data
 st.write(f"Displaying data for keyword: {', '.join(selected_keyword)}")
 if "All" in selected_keyword:
@@ -84,9 +88,12 @@ else:
     # text is each element in Month Column
     filtered_data = df[df['Month'].apply(lambda text: all(keyword.lower() in text.lower() for keyword in selected_keyword))]
 
-# st.write(filtered_data)
 # Apply keyword filter to the DataFrame
 df = filtered_data
+
+#Filter from Search Bar
+df = df[df["Month"].str.contains(selected_keyword2, case=False, na=False)]
+
 
 
 df_12M = df.iloc[:,-16:-4]
