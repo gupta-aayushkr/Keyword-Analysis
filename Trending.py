@@ -145,31 +145,31 @@ try:
         data_df,
         column_config={
             "Keywords": st.column_config.TextColumn(
-                "Keywords", help="The name of the user", max_chars=100
+                "Keywords", help="Related Keywords", max_chars=100
             ),
             "12M": st.column_config.BarChartColumn(
                 "12M",
-                help="Sales in the last 12 months",
+                help="Trending in the last 12 months",
                 y_min=0,
                 y_max=100,
             ),
             "6M": st.column_config.NumberColumn(
                 "6M",
-                help="Sales in the last 6 months",
+                help="Trending in the last 6 months",
                 format="%.2f",
             ),
             "3M": st.column_config.NumberColumn(
                 "3M",
-                help="Sales in the last 3 months",
+                help="Trending in the last 3 months",
                 format="%.2f",
             ),
             "1M": st.column_config.NumberColumn(
                 "1M",
-                help="Sales in the last 1 month",
+                help="Trending in the last 1 month",
                 format="%.2f",
             ),
             "Sum": st.column_config.NumberColumn(
-                "Sum", help="Total sales sum", format="%.2f"
+                "Sum", help="Most Searched Trend", format="%.2f"
             ),
         },
         hide_index=True,
